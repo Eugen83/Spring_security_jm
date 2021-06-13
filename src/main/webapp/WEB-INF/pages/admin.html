@@ -20,6 +20,7 @@
         <th>city</th>
         <th>edit</th>
         <th>delete</th>
+        <th>role(s)</th>
     </tr>
     <tr th:each="user : ${usersList}">
         <td th:text="${user.id}"></td>
@@ -28,6 +29,7 @@
         <td th:text="${user.lastName}"></td>
         <td th:text="${user.age}"></td>
         <td th:text="${user.email}"></td>
+        <td th:text="${user.getRoles()}"></td>
         <td><a th:href="@{'/admin/edit/'+${user.id}}">edit</a></td>
         <td><a th:href="@{'/admin/delete/'+${user.id}}">delete</a></td>
         </td>
@@ -35,7 +37,7 @@
     </tbody>
 </table>
 <h2>Add user</h2>
-<a th:href="@{'/admin/add'}">Add new user</a>
+<a th:href="@{'/admin/new'}">Add new user</a>
 <p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="logout"/>
