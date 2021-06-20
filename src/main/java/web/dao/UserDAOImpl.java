@@ -25,14 +25,14 @@ public class UserDAOImpl implements UserDAO{
         return resultList;
     }
 
- //   @Transactional
+    @Transactional
     @Override
     public void save(User user) {
         User managed = entityManager.merge(user);
         entityManager.persist(managed);
     }
 
- //   @Transactional
+    @Transactional
     @Override
     public void delete(User user) {
         User managed = entityManager.merge(user);

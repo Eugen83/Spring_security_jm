@@ -6,80 +6,43 @@
     <h1>Add user</h1>
 </head>
 <body>
-<form th:action="@{/admin/add}" th:object="${user}" method="post">
+<form th:action="@{/admin}" th:object="${user}" method="post">
 
-<p><label for="name">name</label></p>
-<p><input type="text" th:field="*{name}" id="name" value="name" required></p>
+<!--    <p><input type="hidden" name="id" /></p>-->
 
-<p><label for="password">password</label></p>
-<p><input type="password" th:field="*{password}" id="password" value="password"></p>
+    <p><label for="name">name</label></p>
+    <p><input type="text" th:field="*{name}"  id="name" required></p>
 
-<p><label for="lastName">lastname</label></p>
-<p><input type="text" th:field="*{lastName}"   id="lastName" value="lastName"></p>
+    <p><label for="lastName">lastname</label></p>
+    <p><input type="text" th:field="*{lastName}" id="lastName" ></p>
 
-<p><label for="age">age</label></p>
-<p><input type="number" th:field="*{age}" id="age" value="age"></p>
+    <p><label for="age">age</label></p>
+    <p><input type="number" th:field="*{age}" id="age" ></p>
 
-<p><label for="email">email</label></p>
-<p><input type="text" th:field="*{email}" id="email" value="email"></p>
+    <p><label for="password">password</label></p>
+    <p><input type="password" th:field="*{password}" id="password" ></p>
 
-<!--    <ul>-->
-<!--        <li th:each="role : ${roleSet}">-->
-<!--            <input type="checkbox" name="roles" th:field="*{roles}" th:value="${role.getName()}"-->
-<!--                   th:text="${role.getName()}" />-->
-<!--        </li>-->
-<!--    </ul>-->
+    <p><label for="email">email</label></p>
+    <p><input type="text" th:field="*{email}" id="email"></p>
 
-<!--    <p><strong>Select Roles(Multiple):</strong>-->
-<!--        <select id="multiple-roles" th:field="*{roles}" size="1" multiple="multiple">-->
+    <br/>
+    <div class="form-group" th:object="${rolelist}">
+        <label class="col-form-label">Select Role</label>
+        <select class="form-control" name="role_id" multiple size="2">
+            <option th:each="role : ${rolelist}"
+                    th:value="${role.id}"
+                    th:utext="${role.name}"/>
+        </select>
+    </div>
+    <br/>
 
-<!--            <option th:each="role : ${roleSet}"-->
-<!--                    th:value="${{role.name}}"-->
-<!--                    th:text="${role.id}">-->
-<!--        </select>-->
-<!--    </p>-->
-
-
-    <p>
-        <label>Roles:
-            <input type="checkbox" name="roles" th:field="*{roles}"
-                   th:each="role : ${roleSet}"
-                   th:text="${role.name}"
-                   th:value="${role.name}"
-            />
-        </label>
-    </p>
 
 
 <p>
-    <input type="submit" value="add">
+    <input type="submit" value="add"/>
 </p>
 </form>
 
-<!--<form action="#" th:action="@{admin/adduser}" th:object="${user}" method="post">-->
-<!--    <label for="name">Name</label>-->
-<!--    <input type="text" th:field="*{name}" id="name" placeholder="Name">-->
-
-<!--    <label for="lastName">Last Name</label>-->
-<!--    <input type="text" th:field="*{lastName}" id="lastName" placeholder="lastName">-->
-
-<!--    <label for="email">email</label>-->
-<!--    <input type="text" th:field="*{email}" id="email" placeholder="email">-->
-
-<!--    <label for="password">password</label>-->
-<!--    <input type="password" th:field="*{password}" id="password" placeholder="password">-->
-
-<!--    <p>-->
-<!--        <label>Roles:-->
-<!--            <input type="checkbox" name="authorities"-->
-<!--                   th:each="role : ${allRoles}"-->
-<!--                   th:text="${role.name}"-->
-<!--                   th:value="${role.id}"-->
-<!--            />-->
-<!--        </label>-->
-<!--    </p>-->
-<!--    <input type="submit" value="Add User">-->
-<!--</form>-->
 
 <p>
 <form th:action="@{/logout}" method="post">

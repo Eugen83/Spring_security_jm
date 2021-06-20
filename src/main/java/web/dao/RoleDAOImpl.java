@@ -9,7 +9,10 @@ import web.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Transactional
@@ -50,14 +53,14 @@ public class RoleDAOImpl implements RoleDAO{
     @Override
 
     public Role getRoleByName(String rolename) {
-        try{
+//        try{
             Role role = entityManager.createQuery("SELECT r FROM Role r where r.name = :name", Role.class)
                     .setParameter("name", rolename)
                     .getSingleResult();
             return role;
-        } catch (NoResultException ex){
-            return null;
-        }
+//        } catch (NoResultException ex){
+//            return null;
+//        }
     }
 
 
@@ -68,5 +71,22 @@ public class RoleDAOImpl implements RoleDAO{
             save(role);
         }
         return role;
+    }
+
+
+    @Override
+    public Set<Role> roleById(Long[] role_id) {
+        Set<Role> roleResult = new HashSet<>();
+        for (Long id : role_id) {
+            TypedQuery<Role> q = entityManager.createQuery("select role from Role role where role.id = :id", Role.class);
+            q.setParameter("id", id);
+            Role result = q.getResultList()
+                    .stream()
+                    .filter(role -> role.getId() == id)
+                    .findAny()
+                    .orElse(null);
+            roleResult.add(result);
+        }
+        return roleResult;
     }
 }

@@ -24,12 +24,18 @@
     <p><label for="email">city</label></p>
     <p><input type="text" th:field="*{email}" id="email" value="email"></p>
 
-    <ul>
-        <li th:each="role : ${rolelist}">
-            <input type="checkbox" name="roles" th:field="*{roles}" th:value="${role.getName()}"
-                   th:text="${role.getName()}" />
-        </li>
-    </ul>
+
+    <br/>
+    <div class="form-group" th:object="${rolelist}">
+        <label class="col-form-label">Select Role</label>
+        <select class="form-control" name="role_id" multiple size="2">
+            <option th:each="role : ${rolelist}"
+                    th:value="${role.id}"
+                    th:utext="${role.name}"/>
+        </select>
+    </div>
+    <br/>
+
     <p>
         <input type="submit" value="edit">
     </p>

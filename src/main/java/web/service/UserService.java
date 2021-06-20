@@ -10,7 +10,7 @@ public interface UserService {
 
     Set<Role> getSetOfRoles(List<String> rolesId);
     List<User> userList();
-    void save(User user, List<String>roles);
+    void save(User user);
     void delete(User user);
     User getById(Long id);
 
